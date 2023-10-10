@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cricket Careers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Player Information</h1>
+        <form id="playerForm">
+            <input type="text" id="name" class="form-control" placeholder="Name" required>
+            <input type="date" id="dob" class="form-control" placeholder="Date of Birth" required>
+            <input type="text" id="photoUrl" class="form-control" placeholder="Photo URL" required>
+            <input type="text" id="birthPlace" class="form-control" placeholder="Birth Place" required>
+            <input type="number" id="matches" class="form-control"  placeholder="Matches" required>
+            <input type="number" id="runs" class="form-control"  placeholder="Total runs" required>
+            <input type="number" id="fifties" class="form-control"  placeholder="Fifties" required>
+            <input type="number" id="centuries" class="form-control"  placeholder="Centuries" required>
+            <input type="number" id="wickets" class="form-control"  placeholder="wickets" required>
+            <input type="number" id="average" class="form-control"  placeholder="average" required>
+            <textarea id="careerDesc" class="form-control" placeholder="Career Description"></textarea>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <div class="float-right">
+            <input type="text" id="searchBox" class="form-control" placeholder="Search">
+            <button id="searchButton" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const API_BASE_URL = 'https://crudcrud.com/api/1c9f74fd6a064a21a8508194ee99d3f1';
+        document.getElementById('playerForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const data = {
+                name: document.getElementById('name').value,
+                dob: document.getElementById('dob').value,
+                photoUrl: document.getElementById('photoUrl').value,
+                birthPlace: document.getElementById('birthPlace').value,
+                careerDesc: document.getElementById('careerDesc').value,
+                // Add more fields as needed
+            };
+            try {
+                await axios.post('/api/players', data);
+                // Clear input fields
+                document.getElementById('name').value = '';
+                document.getElementById('dob').value = '';
+                document.getElementById('photoUrl').value = '';
+                document.getElementById('birthPlace').value = '';
+                document.getElementById('careerDesc').value = '';
+                // Clear more fields as needed
+            } catch (error) {
+                console.error('Error saving player:', error);
+            }
+        });
+
+        document.getElementById('searchButton').addEventListener('click', async function () {
+            const query = document.getElementById('searchBox').value;
+            try {
+                const response = await axios.get(`/api/search?query=${encodeURIComponent(query)}`);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error searching:', error);
+            }
+        });
+    </script>
+</body>
+</html>
