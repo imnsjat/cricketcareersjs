@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1> Player Profile </h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img id="playerImage" src="https://www.cricbuzz.com/a/img/v1/152x152/i1/c332891/virat-kohli.jpg" alt="player image" class="img-fluid">
+                <h5 id="playername" class="card-title">Virat Kohli</h5>
+                <p id="playerage">Age: 36</p>
+                <p id="playerBirthPlace">Birth Place: Delhi </p>
+                <p id="playerMatches">Matches: 283</p>
+                <p id="playerRuns">Runs : 13168</p>
+                <p id="playerFifties">Fifties: 67</p>
+                <p id="playerCenturies">Centuries: 47</p>
+                <p id="playerWickets">Wickets: 4</p>
+                <p id="playerAverage">Average: 57</p>
+            </div>
+
+            <div class="col-md-6">
+                <button id="editButton" class="btn  m-3  btn-danger">Edit Profile</button>
+                <input type="text" id="searchBox" placeholder="Search Player" class="form-control">
+                <button id="searchButton" class="btn btn-primary">Search</button>
+
+                <div id="playerDesc" class="mt-3">Career Description: Considered to be one of the best cricketers in the world, he is widely regarded as one of the greatest batsmen in the history of the sport. Nicknamed "The King", due to his dominant style of play and popularity, Kohli holds numerous records in his career across all formats. In 2020, the International Cricket Council named him the male cricketer of the decade. Kohli has also contributed to India's successes, captaining the team from 2014 to 2022, and winning the 2011 World Cup and the 2013 Champions trophy. He is among the only four Indian cricketers who have played over 500 matches for India.
+
+Born and raised in New Delhi, Kohli trained at the West Delhi Cricket Academy and started his youth career with the Delhi Under-15 team. He made his international debut in 2008 and quickly became a key player in the ODI team and later made his Test debut in 2011. In 2013, Kohli reached the number one spot in the ICC rankings for ODI batsmen for the first time. During 2014 T20 World Cup, he set a record for the most runs scored in the tournament. In 2018, he achieved yet another milestone, becoming the world's top-ranked Test batsman, making him the only Indian cricketer to hold the number one spot in all three formats of the game</div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+
+
+    <script>
+
+        const API_BASE_URL = 'http://localhost:3000'; 
+
+        document.getElementById('searchButton').addEventListener('click', async function () {
+            const query = document.getElementById('searchBox').value;
+            const playername =query.trim().replace(/\s/g, '_').toLowerCase();
+            try {
+                await axios.get(`${API_BASE_URL}/search?query=${encodeURIComponent(query)}`);
+                window.location.href = `${API_BASE_URL}/playerinfo_${playername}`
+            } catch (error) {
+                console.error('Error searching:', error);
+            }
+        }); 
+
+        document.getElementById('editButton').addEventListener('click', async function () {
+            const player = document.getElementById('playername').textContent;
+            const playername =player.trim().replace(/\s/g, '_').toLowerCase();
+            try {
+                await axios.get(`${API_BASE_URL}/edit?query=${encodeURIComponent(player)}`);
+                window.location.href = `${API_BASE_URL}/edit_${playername}`
+            } catch (error) {
+                console.error('Error editing:', error);
+            }
+        });
+
+
+    </script>
+</body>
+</html>

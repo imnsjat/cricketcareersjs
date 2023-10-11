@@ -8,17 +8,17 @@
     <div class="container">
         <h1>Player Information</h1>
         <form id="playerForm">
-            <input type="text" id="name" class="form-control" placeholder="Name" required>
-            <input type="number" id="age" class="form-control" placeholder="Age" required>
-            <input type="text" id="photoUrl" class="form-control" placeholder="Photo URL" required>
-            <input type="text" id="birthPlace" class="form-control" placeholder="Birth Place" required>
-            <input type="number" id="matches" class="form-control"  placeholder="Matches" required>
-            <input type="number" id="runs" class="form-control"  placeholder="Total runs" required>
-            <input type="number" id="fifties" class="form-control"  placeholder="Fifties" required>
-            <input type="number" id="centuries" class="form-control"  placeholder="Centuries" required>
-            <input type="number" id="wickets" class="form-control"  placeholder="wickets" required>
-            <input type="number" id="average" class="form-control"  placeholder="average" required>
-            <textarea id="careerDesc" class="form-control" placeholder="Career Description"></textarea>
+            <input type="text" id="name" value="{{name}}" class="form-control" placeholder="Name" required>
+            <input type="number" id="age" value={{age}} class="form-control" placeholder="Age" required>
+            <input type="text" id="photoUrl" value="{{photourl}}"  class="form-control" placeholder="Photo URL" required>
+            <input type="text" id="birthPlace" value="{{birthplace}}"  class="form-control" placeholder="Birth Place" required>
+            <input type="number" id="matches" value={{matches}}  class="form-control"  placeholder="Matches" required>
+            <input type="number" id="runs" value={{runs}}  class="form-control"  placeholder="Total runs" required>
+            <input type="number" id="fifties" value={{fifties}}  class="form-control"  placeholder="Fifties" required>
+            <input type="number" id="centuries" value={{centuries}}  class="form-control"  placeholder="Centuries" required>
+            <input type="number" id="wickets" value={{wickets}}  class="form-control"  placeholder="wickets" required>
+            <input type="number" id="average" value={{average}}  class="form-control"  placeholder="average" required>
+            <textarea id="careerDesc"  class="form-control" placeholder="Career Description">{{description}}</textarea>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
